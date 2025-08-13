@@ -1,0 +1,31 @@
+client_id,legal_name,business_name,is_active,activated_date,inactivated_date,country_id,subscription_id
+1,"Walker, Garrison and Quinn",Inc,False,2025-04-28,2025-06-06,1,1
+2,Pierce Inc,LLC,False,2023-10-03,2023-10-25,1,1
+3,"Brown, Clark and Gallagher",Inc,False,2025-04-21,2025-06-06,1,2
+4,"Valdez, Morris and Palmer",Group,True,2025-04-07,,1,2
+5,Cantu-Avery,Inc,True,2024-02-28,,1,5
+6,"Wheeler, Martinez and Hernandez",PLC,True,2025-05-01,,1,5
+7,"Rogers, Booth and Silva",LLC,True,2024-11-03,,1,1
+8,Nunez Inc,Inc,True,2024-04-06,,1,5
+9,"Good, Peters and Mcdonald",Inc,True,2023-09-17,,1,2
+10,Raymond-Blankenship,and Sons,True,2024-01-03,,1,5
+11,Padilla Ltd,Group,True,2024-07-02,,1,4
+12,Bates Ltd,Inc,True,2024-06-22,,1,2
+13,"Ramirez, Sharp and Davis",LLC,True,2024-01-21,,1,4
+14,"Hernandez, Phillips and Fields",Inc,True,2024-11-01,,1,5
+15,Farmer-Rodriguez,Ltd,True,2024-12-23,,1,3
+16,Howell Inc,LLC,True,2024-07-14,,1,1
+17,King-Skinner,Group,True,2025-02-24,,1,2
+18,Weiss-Underwood,Ltd,True,2025-06-02,,1,4
+19,Green-Moore,LLC,True,2025-03-23,,1,3
+20,Harris-Day,LLC,True,2024-05-14,,1,3
+21,Gould-Rivas,LLC,True,2023-09-09,,2,2
+22,Jensen PLC,PLC,True,2025-02-10,,2,2
+23,Meadows Group,Inc,True,2025-07-04,,2,3
+24,"Watkins, Ponce and Smith",PLC,True,2024-10-16,,2,1
+25,Mack Ltd,Inc,True,2024-08-25,,2,1
+26,Padilla Inc,LLC,True,2025-07-03,,2,4
+27,Lutz LLC,PLC,True,2024-03-11,,2,1
+28,"Miller, Barker and Evans",Group,True,2023-11-29,,2,3
+29,Goodwin-Hernandez,LLC,True,2024-06-27,,2,3
+30,Alvarado Ltd,Ltd,True,2024-12-17,,2,5
