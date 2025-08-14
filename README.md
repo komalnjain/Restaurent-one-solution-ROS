@@ -72,25 +72,27 @@ start ros_dashboard_dynamic.html
 
 ## 📈 **Dashboard Features & Visualizations**
 
-### **1. Executive Metrics Dashboard**
-![Metrics Dashboard](https://via.placeholder.com/800x400/667eea/ffffff?text=Executive+Metrics+Dashboard)
+### **1. Live Dashboard Overview**
+![ROS Dashboard - Live Data](./screenshots/dashboard_main.png)
 
 **Real-time KPI Cards:**
 - 💰 **Revenue Tracking**: £102.4M annual revenue
 - 📊 **Profit Analysis**: 61.3% net profit margin
 - 🏪 **Restaurant Count**: 50 locations (40 UK, 10 India)
-- 📦 **Order Volume**: 547,000+ orders processed
+- 📦 **Order Volume**: 5.47M+ orders processed
 
-### **2. Geographic Performance Analysis**
-![Geographic Analysis](https://via.placeholder.com/800x400/764ba2/ffffff?text=Geographic+Performance+Analysis)
+### **2. Restaurant Performance Summary**
+![Restaurant Summary](./screenshots/restaurants_summary.png)
 
-**Regional Breakdown:**
-- 🇬🇧 **UK Operations**: 80% of locations, 8% tax rate
-- 🇮🇳 **India Operations**: 20% of locations, 18% tax rate
-- 🌍 **Market Expansion**: Strategic growth opportunities
+**Key Metrics per Restaurant:**
+- 📈 Total Orders
+- 💰 Total Revenue
+- 💹 Total Expenses
+- ✨ Profit
+- 📊 Average Order Value
 
-### **3. Financial Control Center**
-![Financial Dashboard](https://via.placeholder.com/800x400/667eea/ffffff?text=Financial+Control+Center)
+### **3. Financial & Operational Analytics**
+![Performance Metrics](./screenshots/performance_metrics.png)
 
 **Key Financial Metrics:**
 - 💳 **Reconciliation Rate**: 50.3% (Target: 95%)
