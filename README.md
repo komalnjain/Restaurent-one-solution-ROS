@@ -56,10 +56,16 @@ pip install pandas numpy
 python ros_data_processor.py
 ```
 
-4. **Open Dashboard**
+4. **Start Local Server** (Optional)
+```bash
+python -m http.server 8000
+```
+
+5. **Open Dashboard**
 ```bash
 # Open in your default browser
 start ros_dashboard_dynamic.html
+# Or visit: http://localhost:8000/ros_dashboard_dynamic.html
 ```
 
 ---
@@ -133,20 +139,21 @@ graph TD
 ```
 Restaurent-one-solution-ROS/
 ├── 📊 Data Files
-│   ├── clients.csv          # Client information
-│   ├── restaurants.csv      # Restaurant locations
-│   ├── users.csv           # User accounts
-│   ├── subscriptions.csv   # Subscription plans
-│   ├── orders.csv          # Order transactions
-│   ├── sales.csv           # Sales data
-│   ├── expenses.csv        # Expense tracking
-│   ├── cashup.csv          # Cash reconciliation
-│   └── banking.csv         # Banking transactions
+│   └── csv_data/                  # All CSV files organized
+│       ├── clients.csv            # Client information
+│       ├── restaurants.csv        # Restaurant locations
+│       ├── users.csv              # User accounts
+│       ├── subscriptions.csv      # Subscription plans
+│       ├── orders.csv             # Order transactions
+│       ├── sales.csv              # Sales data
+│       ├── expenses.csv           # Expense tracking
+│       ├── cashup.csv             # Cash reconciliation
+│       ├── banking.csv            # Banking transactions
+│       └── deliveries.csv         # Delivery data
 ├── 🐍 Processing
-│   └── ros_data_processor.py    # Data analysis engine
+│   └── ros_data_processor.py    # Integrated data analysis engine
 ├── 🌐 Dashboard
-│   ├── ros_dashboard_dynamic.html  # Main dashboard
-│   ├── ros_dashboard.html          # Static dashboard
+│   ├── ros_dashboard_dynamic.html  # Main interactive dashboard
 │   └── ros_dashboard_data.json     # Generated metrics
 ├── 📋 Documentation
 │   ├── README.md                   # This file
@@ -157,19 +164,41 @@ Restaurent-one-solution-ROS/
 
 ---
 
+## 🔧 **Recent Improvements & File Organization**
+
+### **✅ Integrated Data Processing**
+- **Single Script**: All data processing functionality consolidated into `ros_data_processor.py`
+- **Built-in Debugging**: Subscription data checking and validation included
+- **Comprehensive Error Handling**: Fallback mechanisms for robust data processing
+- **Date Format Fixes**: Proper handling of DD-MM-YYYY vs YYYY-MM-DD formats
+
+### **📁 Organized File Structure**
+- **CSV Data Folder**: All CSV files organized in `csv_data/` directory
+- **Clean Dashboard**: Removed unnecessary test and static files
+- **Streamlined Processing**: Single command to generate all dashboard data
+
+### **🎯 Key Features**
+- **Real-time Data Processing**: Handles 547K+ orders efficiently
+- **Subscription Analysis**: Complete mapping and utilization tracking
+- **Financial Reconciliation**: Automated cash flow and banking analysis
+- **Geographic Performance**: UK vs India restaurant analysis
+
+---
+
 ## 📊 **Data Analysis Capabilities**
 
 ### **Automated Metrics Calculation**
 
-The `ros_data_processor.py` script performs comprehensive analysis:
+The integrated `ros_data_processor.py` script performs comprehensive analysis:
 
 ```python
 # Key Analysis Functions
 def load_and_analyze_data():
-    # Loads 9 CSV files (~46MB total)
+    # Loads 10 CSV files from csv_data/ folder (~46MB total)
     # Processes 547,000+ order records
     # Calculates 50+ business metrics
     # Generates real-time insights
+    # Includes subscription data validation
 
 def calculate_financial_metrics():
     # Revenue analysis by location
@@ -524,5 +553,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **Last Updated**: January 2025  
 **Version**: 2.0  
 **Maintainer**: ROS Development Team
+
+to run 
+1 python ros_data_processor.py
+2 Start-Job -ScriptBlock { Set-Location 
+'C:\Users\laptop\Downloads\data'; python -m http.server 8000 }
+3 start-Process 'http://localhost:8000/ros_dashboard_dynamic.html'
+
 
 </div>

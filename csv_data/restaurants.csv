@@ -1,0 +1,51 @@
+id,name,legal_name,client_id,country_id
+1,"Herrera, Foster and Johnson","Mccoy, Jones and Edwards",9,1
+2,Owen-Wolfe,Terry-Mclaughlin,2,1
+3,Duran Group,Ferguson-Mason,15,1
+4,"Buck, Miranda and Kelly","Dean, Duarte and Jenkins",18,1
+5,Harris and Sons,Edwards-Taylor,4,1
+6,"Nolan, Hudson and King",Woodward-Hanna,13,1
+7,Collins-Armstrong,Morales-Fisher,3,1
+8,"Long, Hooper and Mccarthy",Rivers-Schwartz,18,1
+9,Jefferson Group,"Molina, Swanson and Mendoza",10,1
+10,Hill Group,"Hall, Woodward and Brown",20,1
+11,Avila Inc,"Price, Kennedy and Roth",12,1
+12,Smith and Sons,"Burns, Reyes and Roberts",19,1
+13,"Hess, Hall and Hill",Campbell-Walls,7,1
+14,"Mitchell, Simpson and Martin",Lopez PLC,3,1
+15,"Yoder, Walsh and Ibarra",Summers PLC,2,1
+16,"Bell, Spears and Gardner",Peterson Inc,8,1
+17,Lopez-Stephens,"Jensen, Griffin and Rice",10,1
+18,"Harrell, Jackson and Hernandez","Snyder, Cochran and Becker",3,1
+19,Howard-Webster,"Horn, Berry and Webb",8,1
+20,Williams-Lee,Olson Ltd,4,1
+21,Hinton LLC,Sullivan PLC,13,1
+22,Huber-Fisher,Bush-Guerra,9,1
+23,Villanueva PLC,Parrish-Brooks,15,1
+24,"Bell, Martin and Rose",Rodriguez-Reynolds,12,1
+25,"Richard, White and Peterson","Garcia, Carpenter and Rivera",6,1
+26,Davis and Sons,"Warner, Alexander and Brown",12,1
+27,"Craig, Graves and Roberts",Parker Ltd,12,1
+28,Bennett and Sons,Santiago-Wells,7,1
+29,Hogan-Miller,Coleman-Blankenship,9,1
+30,Maldonado PLC,Cortez-Bradford,3,1
+31,"Cervantes, Smith and Smith",Mitchell-Watkins,20,1
+32,Ferrell-Bell,"Lambert, Zavala and Holt",6,1
+33,Meyer-White,Parker LLC,18,1
+34,Perez-Walker,Finley-Weber,8,1
+35,Rodriguez-Pierce,"Collins, Oliver and Jones",6,1
+36,"Moore, Patton and Shepard",Mann Inc,15,1
+37,Donovan and Sons,Ferguson PLC,13,1
+38,Smith-Turner,Hawkins-Wallace,9,1
+39,"Lucas, Wood and Hancock","Perez, Martinez and Mccarthy",18,1
+40,"Jones, Davis and Sutton","Foley, Webb and Lee",8,1
+41,Hill Inc,James-Wilson,26,2
+42,"Smith, Barrett and Vazquez",Taylor-Sawyer,21,2
+43,Mcbride PLC,Reilly LLC,24,2
+44,Huff Group,"Clark, Wong and Stokes",21,2
+45,"Moore, Crawford and Black","Thomas, Garcia and Barajas",26,2
+46,Sanders-Johnson,"Patterson, Campos and Rivera",27,2
+47,"Benitez, Garcia and Ortiz",Long Group,25,2
+48,Moore Ltd,Escobar-Evans,22,2
+49,Blair Ltd,Shaw Group,24,2
+50,Robertson-Holland,"Williams, Aguilar and Rich",30,2

@@ -220,6 +220,33 @@
                 grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             }
         }
+
+        .operational-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .operational-table th,
+        .operational-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .operational-table th {
+            background: #f8f9fa;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .operational-table tr:hover {
+            background: #f8f9fa;
+        }
     </style>
 </head>
 <body>
@@ -521,11 +548,21 @@
             // Revenue by Subscription Chart (filter-aware)
             const subRevCtx = document.getElementById('subscriptionRevenueChart').getContext('2d');
             function computeRevenueBySubscription() {
+                // Use pre-calculated revenue by subscription data if available
+                if (data.revenue_by_subscription && data.revenue_by_subscription.length > 0) {
+                    const sorted = data.revenue_by_subscription.sort((a, b) => b.revenue - a.revenue);
+                    return {
+                        labels: sorted.map(item => item.subscription),
+                        values: sorted.map(item => item.revenue)
+                    };
+                }
+                
+                // Fallback to original calculation method
                 // Determine scope by client/restaurant/date
                 const cid = document.getElementById('clientFilter').value;
                 const rid = document.getElementById('restaurantFilter').value;
-                const from = document.getElementById('dateFrom').value ? new Date(document.getElementById('dateFrom').value) : null;
-                const to = document.getElementById('dateTo').value ? new Date(document.getElementById('dateTo').value) : null;
+                const from = document.getElementById('dateFrom') && document.getElementById('dateFrom').value ? new Date(document.getElementById('dateFrom').value) : null;
+                const to = document.getElementById('dateTo') && document.getElementById('dateTo').value ? new Date(document.getElementById('dateTo').value) : null;
 
                 // Select restaurants in scope
                 let allowedRestaurantIds = null; // null means all
@@ -549,7 +586,7 @@
                 const clientToSubscription = new Map();
                 if (data.clients_list && data.clients_list.length) {
                     for (const c of data.clients_list) {
-                        const name = (c.subscription_name && c.subscription_name.trim()) ? c.subscription_name : '';
+                        const name = (c.subscription_name && c.subscription_name.trim()) ? c.subscription_name : (c.display_name || '');
                         if (name) clientToSubscription.set(String(c.client_id), name);
                     }
                 }
@@ -557,7 +594,7 @@
                 if (data.client_subscription_utilization) {
                     for (const c of data.client_subscription_utilization) {
                         const key = String(c.client_id);
-                        const name = (c.subscription_name && String(c.subscription_name).trim()) ? c.subscription_name : '';
+                        const name = (c.subscription_name && String(c.subscription_name).trim()) ? c.subscription_name : (c.display_name || '');
                         if (name && (!clientToSubscription.has(key) || !clientToSubscription.get(key))) {
                             clientToSubscription.set(key, name);
                         }
@@ -619,8 +656,8 @@
             function updateChartsForFilters() {
                 const cid = document.getElementById('clientFilter').value;
                 const rid = document.getElementById('restaurantFilter').value;
-                const from = document.getElementById('dateFrom').value ? new Date(document.getElementById('dateFrom').value) : null;
-                const to = document.getElementById('dateTo').value ? new Date(document.getElementById('dateTo').value) : null;
+                const from = document.getElementById('dateFrom') && document.getElementById('dateFrom').value ? new Date(document.getElementById('dateFrom').value) : null;
+                const to = document.getElementById('dateTo') && document.getElementById('dateTo').value ? new Date(document.getElementById('dateTo').value) : null;
 
                 // Filter daily rows
                 const daily = data.per_restaurant_daily.filter(r => {
@@ -631,25 +668,24 @@
                     return byDate && byClient && byRestaurant;
                 });
 
-                // Sum revenue categories
-                const sum = (arr, k) => arr.reduce((a, b) => a + (b[k] || 0), 0);
+                // Use financial breakdown data for revenue and expense charts
                 const revVals = [
-                    sum(daily, 'food_payment'),
-                    sum(daily, 'drinks_payment'),
-                    sum(daily, 'other_payment'),
-                    sum(daily, 'service_charges'),
-                    sum(daily, 'delivery_charges')
+                    data.financial_breakdown.revenue.food_revenue || 0,
+                    data.financial_breakdown.revenue.drinks_revenue || 0,
+                    data.financial_breakdown.revenue.other_revenue || 0,
+                    data.financial_breakdown.revenue.service_charges || 0,
+                    data.financial_breakdown.revenue.delivery_charges || 0
                 ];
                 revenueChart.data.datasets[0].data = revVals;
                 revenueChart.update();
 
                 // Sum expense categories
                 const expVals = [
-                    sum(daily, 'bills'),
-                    sum(daily, 'vendors'),
-                    sum(daily, 'wage_advance'),
-                    sum(daily, 'repairs'),
-                    sum(daily, 'sundries')
+                    data.financial_breakdown.expenses.bills || 0,
+                    data.financial_breakdown.expenses.vendors || 0,
+                    data.financial_breakdown.expenses.wage_advance || 0,
+                    data.financial_breakdown.expenses.repairs || 0,
+                    data.financial_breakdown.expenses.sundries || 0
                 ];
                 expensesChart.data.datasets[0].data = expVals;
                 expensesChart.update();
@@ -950,8 +986,8 @@
             const container = document.getElementById('summaryTable');
 
             // If date filter active, aggregate from per_restaurant_daily; else use restaurants_summary
-            const from = document.getElementById('dateFrom').value ? new Date(document.getElementById('dateFrom').value) : null;
-            const to = document.getElementById('dateTo').value ? new Date(document.getElementById('dateTo').value) : null;
+            const from = document.getElementById('dateFrom') && document.getElementById('dateFrom').value ? new Date(document.getElementById('dateFrom').value) : null;
+            const to = document.getElementById('dateTo') && document.getElementById('dateTo').value ? new Date(document.getElementById('dateTo').value) : null;
 
             let rows = [];
             const selClient = document.getElementById('clientFilter').value;
@@ -987,10 +1023,52 @@
                     avg_order_value: o.total_orders ? o.total_revenue / o.total_orders : 0
                 }));
             } else {
-                rows = data.restaurants_summary.map(r => ({
-                    ...r,
-                    profit: r.total_revenue - r.total_expenses
-                }));
+                // If restaurants_summary is empty, try to create it from available data
+                if (data.restaurants_summary && data.restaurants_summary.length > 0) {
+                    rows = data.restaurants_summary.map(r => ({
+                        ...r,
+                        profit: r.total_revenue - r.total_expenses
+                    }));
+                } else if (data.per_restaurant_daily && data.per_restaurant_daily.length > 0) {
+                    // Create summary from daily data
+                    const map = new Map();
+                    data.per_restaurant_daily.forEach(r => {
+                        const key = r.restaurant_id;
+                        if (!map.has(key)) {
+                            map.set(key, { 
+                                restaurant_id: r.restaurant_id, 
+                                name: r.name, 
+                                country: r.country, 
+                                total_orders: 0, 
+                                total_revenue: 0, 
+                                total_expenses: 0 
+                            });
+                        }
+                        const obj = map.get(key);
+                        obj.total_orders += r.orders || 0;
+                        obj.total_revenue += r.revenue || 0;
+                        obj.total_expenses += r.expenses || 0;
+                    });
+                    rows = Array.from(map.values()).map(o => ({
+                        ...o,
+                        profit: o.total_revenue - o.total_expenses,
+                        avg_order_value: o.total_orders ? o.total_revenue / o.total_orders : 0
+                    }));
+                } else if (data.restaurants_list && data.restaurants_list.length > 0) {
+                    // Create basic summary from restaurants list
+                    rows = data.restaurants_list.map(r => ({
+                        restaurant_id: r.restaurant_id,
+                        name: r.name,
+                        country: 'UK', // Default
+                        total_orders: 0,
+                        total_revenue: 0,
+                        total_expenses: 0,
+                        profit: 0,
+                        avg_order_value: 0
+                    }));
+                } else {
+                    rows = [];
+                }
             }
 
             // Pagination
